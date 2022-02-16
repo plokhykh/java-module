@@ -14,7 +14,7 @@ public class Main {
                 "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
         );
 
-        System.out.println(article);
 
+        System.out.println(article);
     }
 }

@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 
+
 public class Comment {
     int postId;
     int id;

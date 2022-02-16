@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 
+
 public class Post {
     private int userId;
     private int id;
