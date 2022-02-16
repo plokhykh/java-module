@@ -1,6 +1,4 @@
-package lessons.lesson1;
-
-import lessons.lesson1.Post;
+package lesson1;
 
 public class Main {
 
