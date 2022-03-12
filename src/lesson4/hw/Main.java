@@ -1,9 +1,8 @@
-package lesson4;
+package lesson4.hw;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -85,6 +84,7 @@ public class Main {
                 .filter(integer -> integer % 3 == 0)
                 .collect(Collectors.toList());
         System.out.println(multipleOfThree);
+
 
 //        intArray.stream()
 //                .sorted((o1, o2) -> o1-o2)
