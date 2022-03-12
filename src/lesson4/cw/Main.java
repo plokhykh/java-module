@@ -41,8 +41,19 @@ public class Main {
         int priceAllCars = cars.stream()
                 .reduce(0, (subtotal, element) -> subtotal + element.getPrice(), Integer::sum);
 
+        final int[] index = {newDrivers.size()-1};
+        List<Car> updateNewDrivers = cars.stream()
+                .filter(car -> car.getId() % 2 == 0)
+                .peek(car -> {
+                    car.setOwner(newDrivers.get(index[0]));
+                    index[0] = index[0]-1;
+                })
+                .collect(Collectors.toList());
+
+
         System.out.println(improvedCars);
         System.out.println(priceAllCars);
+        System.out.println(updateNewDrivers);
 
 
     }
