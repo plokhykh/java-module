@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 
 public class Example {
-
+    
     /*Ввести с консоли имя файла.
-Найти байт или байты с максимальным количеством повторов.
-Вывести их на экран через пробел.
-Закрыть поток ввода-вывода.**/
+    Найти байт или байты с максимальным количеством повторов.
+    Вывести их на экран через пробел.
+    Закрыть поток ввода-вывода.**/
     public void getMaxByteFromFile() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int[] byteArr = new int[256];
