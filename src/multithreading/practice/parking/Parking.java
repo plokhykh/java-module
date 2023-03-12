@@ -1,32 +1,23 @@
 package multithreading.practice.parking;
 
-import java.util.concurrent.ConcurrentHashMap;
+
+import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Parking {
-    public static ConcurrentHashMap<Integer, Car> parking = new ConcurrentHashMap<Integer, Car>();
-
+    private static final int PARKING_SPACES_COUNT = 10;
 
     public static void main(String[] args) {
-        parking.put(1, null);
-        parking.put(2, null);
-        parking.put(3, null);
-        System.out.println(parking);
-        Car car1 = new Car("Mazda");
-        Car car2 = new Car("Toyota");
-        Car car3 = new Car ("Honda");
-        car3.start();
-        car1.start();
-        car2.start();
-        System.out.println(parking);
-    }
+        LinkedList<Integer> parkingSpaces = new LinkedList<>();
 
-
-    public static int getFreeParkingLot (){
-        for (Integer key : parking.keySet()) {
-            if(parking.get(key) == null){
-                return key;
-            }
+        for (int i = 1; i <= PARKING_SPACES_COUNT; i++) {
+            parkingSpaces.add(i);
         }
-        return 0;
+
+        ParkingSpace parkingSpace = new ParkingSpace(parkingSpaces);
+
+        for (int i = 0; i < 20; i++) {
+            new Car("Honda "+i, parkingSpace).start();
+        }
     }
 }
