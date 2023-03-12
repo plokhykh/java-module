@@ -1,44 +1,36 @@
 package multithreading.practice.parking;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Car extends Thread {
-
-    private static final int WAIT_PARKING_LOT = 1500;
     private String name;
+    private ParkingSpace parkingSpace;
 
-    public Car(String name) {
-
+    public Car(String name, ParkingSpace parkingSpace) {
         this.name = name;
+        this.parkingSpace = parkingSpace;
     }
 
     @Override
     public void run() {
-        try {
-            final int freeParkingLot = Parking.getFreeParkingLot();
-            if (freeParkingLot == 0) {
-                System.out.println("All parking lot occupied");
-                Thread.sleep(WAIT_PARKING_LOT);
-                int newParkingLot = Parking.getFreeParkingLot();
-                if (newParkingLot == 0) {
-                    System.out.println("I`m leaving");
-                } else {
-                    Parking.parking.put(newParkingLot, this);
-                    System.out.println(this.toString() + " occupied " + newParkingLot + " parking lot");
-                }
+        Integer freeParkingSpace = null;
 
-            } else {
-                Parking.parking.put(freeParkingLot, this);
-                System.out.println(this.toString() + " occupied " + freeParkingLot + " parking lot");
+        try {
+            System.out.println(name+ " waiting parking space");
+            freeParkingSpace = parkingSpace.getParkingSpace(name, 1000);
+            final int parkingTime = (ThreadLocalRandom.current().nextInt(500, 2000)) ;
+            Thread.sleep(parkingTime);
+        } catch (RuntimeException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            if (freeParkingSpace != null) {
+                System.out.println(name + " vacated parking space: " + freeParkingSpace);
+                parkingSpace.returnParkingSpace(freeParkingSpace);
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+
         }
     }
 
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "name='" + name + '\'' +
-                '}';
-    }
 }
